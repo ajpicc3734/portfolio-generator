@@ -1,30 +1,25 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+const fs = require("fs");
+const generatePage = require("./src/page-template.js");
 
-console.log(profileDataArgs);
+const profileDataArgs = process.argv.slice(2);
+const [name, github] = profileDataArgs;
 
-const animalArray = ["dog", "cat", "pig"];
+fs.writeFile("./index.html", generatePage(name, github), (err) => {
+  if (err) throw new Error(err);
 
-animalArray.push("cow");
+  console.log("Portfolio complete! Check out index.html to see the output!");
+});
 
-const personObj = {
-  name: "Lernantino",
-  age: 99,
-};
+// const printProfileData = (profileDataArr) => {
+//   // This...
+//   for (let i = 0; i < profileDataArr.length; i += 1) {
+//     console.log(profileDataArr[i]);
+//   }
 
-personObj.age = 100;
-personObj.occupation = "Developer";
+//   console.log("================");
 
-const printProfileData = (profileDataArr) => {
-  // for (let i = 0; i < profileDataArr.length; i = +1) {
-  //   console.log(profileDataArr[i]);
-  // }
-  // console.log("================");
+//   // Is the same as this...
+//   profileDataArr.forEach((profileItem) => console.log(profileItem));
+// };
 
-  profileDataArr.forEach((profileItem) => console.log(profileItem));
-};
-
-const addNums = (numOne, numTwo) => numOne + numTwo;
-
-const sum = addNums(5, 3);
-
-console.log(sum);
+// printProfileData(profileDataArgs);
